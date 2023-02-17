@@ -1,1 +1,22 @@
 # create your drupal and postgres config here, based off the last assignment
+version: "2"
+
+services:
+  drupal:
+    image: custom-drupal
+    build: .
+    ports:
+      - 8080:80
+    volumes:
+      - /var/www/html/modules
+      - /var/www/html/profiles
+      - /var/www/html/themes
+      - /var/www/html/sites
+    restart: always
+
+  postgres:
+    image: postgres:14.3
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - /var/lib/postgresql/data
